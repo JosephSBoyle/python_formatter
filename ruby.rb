@@ -21,9 +21,8 @@ def align_equals(lines)
             space_padding = max_length - prefix_spaces
 
             formatted_line = "#{' '*prefix_spaces}#{var.strip.ljust(space_padding)} = #{value.strip}"
-            # formatted_line = "#{' '*prefix_spaces}#{var.strip}#{' ' * space_padding} = #{value.strip}"
           else
-            formatted_line = "#{var.strip.ljust(max_length)} = #{value.strip}"
+            formatted_line = "#{var.strip.ljust(max_length)}= #{value.strip}"
           end
   
           formatted_lines << formatted_line
