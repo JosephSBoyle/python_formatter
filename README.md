@@ -39,5 +39,6 @@ APL ?
 ```bash
 python python.py
 go run main.go
+node typescript.js
 ruby   ruby.rb
 ```
