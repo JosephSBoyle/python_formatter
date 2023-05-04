@@ -41,4 +41,5 @@ python python.py
 go run main.go
 node typescript.js
 ruby   ruby.rb
+source bash.sh
 ```
