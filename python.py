@@ -1,3 +1,4 @@
+
 def align_equals(lines: list[str]) -> list[str]:
     """
     Formats a list of strings of lines such that equals signs in variable assignments are aligned.
