@@ -33,6 +33,9 @@ Kind of like how `gofmt` does for Golang code.
 
 
 # Run commands:
+haskell - too hard!
+C TBD
+APL ? 
 ```bash
 python python.py
 go run main.go

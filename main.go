@@ -69,8 +69,7 @@ func alignEquals(lines []string) []string {
 			maxLength := 0
 			for _, line := range group {
 				parts := strings.SplitN(line, "=", 2)
-				varName := strings.TrimSpace(parts[0])
-				length := len(varName)
+				length := len(parts[0])
 				if length > maxLength {
 					maxLength = length
 				}
@@ -84,8 +83,7 @@ func alignEquals(lines []string) []string {
 				if prefixSpaces := len(parts[0]) - len(strings.TrimLeft(parts[0], " ")); prefixSpaces > 0 {
 					// Special handling for if the line starts with a space,
 					// for instance in multi-line arguments.
-					spacePadding := prefixSpaces - maxLength
-					fmt.Println(spacePadding)
+					spacePadding := maxLength - prefixSpaces
 					formattedLine := fmt.Sprintf(
 						"%s%-*s = %s",
 						strings.Repeat(" ", prefixSpaces),
@@ -95,7 +93,7 @@ func alignEquals(lines []string) []string {
 					)
 					formattedLines = append(formattedLines, formattedLine)
 				} else {
-					formattedLine := fmt.Sprintf("%-*s = %s", maxLength, varName, value)
+					formattedLine := fmt.Sprintf("%-*s= %s", maxLength, varName, value)
 					formattedLines = append(formattedLines, formattedLine)
 				}
 			}

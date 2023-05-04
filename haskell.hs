@@ -1,24 +1,25 @@
-import Data.List (intercalate)
-import Data.Char (isSpace)
+alignEquals :: [String] -> [String]
+alignEquals lines = map formatLine (groupVariables lines)
 
-formatLines :: [String] -> [String]
-formatLines = map formatLine . alignEquals . map stripLine
+formatLine :: String -> String
+formatLine line = case break (== '=') line of
+    (var, '=':value) ->
+        let padding = replicate (maxVarLength - length var) ' '
+        in var ++ padding ++ " = " ++ value
+    _ -> line
 
-stripLine :: String -> String
-stripLine = reverse . dropWhile isSpace . reverse
+groupVariables :: [String] -> [[String]]
+groupVariables lines = go lines []
+  where
+    go [] acc = reverse acc
+    go (l:ls) [] = go ls [[l]]
+    go (l:ls) acc@(g:gs)
+        | isVariable l = go ls ((l:g):gs)
+        | otherwise    = go ls ([l]:acc)
 
-alignEquals :: [String] -> [(String, String)]
-alignEquals = map splitLine
-            . filter (elem '=')
-            . map stripLine
+isVariable :: String -> Bool
+isVariable line = '=' `elem` line && "==" `notElem` line
 
-splitLine :: String -> (String, String)
-splitLine str = let (left, _:right) = break (== '=') str
-                in (left, '=' : right)
-
-formatLine :: (String, String) -> String
-formatLine (left, right) = left ++ padding ++ right
-  where padding = replicate (maxLen - length left) ' '
-
-maxLen :: Int
-maxLen = maximum . map (length . fst) . alignEquals
+maxVarLength :: Int
+maxVarLength = 1 + maximum (map (length . takeWhile (== ' ') . fst . break (== '='))
+                                (filter isVariable lines))
