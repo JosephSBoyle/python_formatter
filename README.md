@@ -3,14 +3,28 @@
 
 Input:
 ```python
-foo = "bar"
-bazbaz = 12
+a = "foo"
+bar = "baz"
+
+cart = "horse"
+def foobar(
+    xx=12,
+    y=9,   
+):
+    return (xx == y)
 ```
 
 Output:
 ```python
-foo    = "bar"
-bazbaz = 12
+a   = "foo"
+bar = "baz"
+
+cart = "horse"
+def foobar(
+    xx=12,
+    y =9,   
+):
+    return (xx == y)
 ```
 
 
